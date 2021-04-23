@@ -13,7 +13,6 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    
     <DockPanel>
         
         <Button Command="{Binding DemoCommand}" 
@@ -27,6 +26,7 @@
             
             <ListBox Items="{Binding Items}" 
                      SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                     Name="ItemsListBox"
                      Grid.Row="1">
                 <ListBox.ItemTemplate>
                     <DataTemplate x:DataType="vm:ItemViewModel">
@@ -39,6 +39,7 @@
 
             <ListBox Items="{Binding SelectedItems}" 
                      SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                     Name="SelectedItemsListBox"
                      Grid.Row="3">
                 <ListBox.ItemTemplate>
                     <DataTemplate x:DataType="vm:ItemViewModel">
