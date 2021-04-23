@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -55,15 +56,13 @@ namespace SelectedItemBugRepro.ViewModels
 
                 await Task.Delay(100);
 
-                RaiseAndChangeSelectedItem(null);
-                RaiseAndChangeSelectedItem(null);
+                Select(null);
 
                 await Task.Delay(100);
 
                 SelectedItems.Add(test1);
 
-                RaiseAndChangeSelectedItem(null);
-                RaiseAndChangeSelectedItem(test1);
+                Select(test1);
 
                 await Task.Yield();
             });
@@ -72,6 +71,7 @@ namespace SelectedItemBugRepro.ViewModels
         private void RaiseAndChangeSelectedItem(ItemViewModel? value)
         {
             _selectedItem = value;
+            Debug.WriteLine($"[MainWindowViewModel.RaisePropertyChanged] ('{value}')");
             this.RaisePropertyChanged(nameof(SelectedItem));
         }
 
@@ -81,13 +81,14 @@ namespace SelectedItemBugRepro.ViewModels
             {
                 return;
             }
-            
+
             RaiseAndChangeSelectedItem(null);
             RaiseAndChangeSelectedItem(value);
         }
 
         public void SetSelectedItem(ItemViewModel? value)
         {
+            Debug.WriteLine($"[MainWindowViewModel.SetSelectedItem] '{value}'");
             Select(value);
         }
     }
