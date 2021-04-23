@@ -1,0 +1,54 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SelectedItemBugRepro.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="SelectedItemBugRepro.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel" x:CompileBindings="True"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="SelectedItemBugRepro">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    
+    <DockPanel>
+        
+        <Button Command="{Binding DemoCommand}" 
+                Content="Demo" 
+                VerticalAlignment="Top"
+                DockPanel.Dock="Right"/>
+        
+        <Grid RowDefinitions="Auto,50*,Auto,50*">
+
+            <Label Grid.Row="0" Content="Items"/>
+            
+            <ListBox Items="{Binding Items}" 
+                     SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                     Grid.Row="1">
+                <ListBox.ItemTemplate>
+                    <DataTemplate x:DataType="vm:ItemViewModel">
+                        <TextBlock Text="{Binding Title}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            
+            <Label Grid.Row="2" Content="SelectedItems"/>
+
+            <ListBox Items="{Binding SelectedItems}" 
+                     SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                     Grid.Row="3">
+                <ListBox.ItemTemplate>
+                    <DataTemplate x:DataType="vm:ItemViewModel">
+                        <TextBlock Text="{Binding Title}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            
+        </Grid>
+        
+    </DockPanel>
+    
+</Window>
