@@ -60,9 +60,9 @@ namespace SelectedItemBugRepro.ViewModels
 
                 await Task.Delay(100);
 
-                SelectedItems.Add(test1);
-
                 Select(test1);
+
+                SelectedItems.Add(test1);
 
                 await Task.Yield();
             });
